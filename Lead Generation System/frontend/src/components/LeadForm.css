@@ -1,0 +1,266 @@
+/* Container and animation unchanged, keep as is */
+
+/* Form group */
+.form-group {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+/* Inputs and Textarea */
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 14px 16px 14px 16px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  font-size: 15px;
+  background: #fff;
+  transition: 
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
+  color: #222;
+  outline: none;
+  padding-top: 22px;
+  /* Disable native autofill bg color */
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  box-shadow: 0 0 0px 1000px white inset;
+}
+
+/* Floating label base */
+.form-group label {
+  position: absolute;
+  top: 18px;
+  left: 16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #666;
+  background: #fff;
+  padding: 0 6px;
+  pointer-events: none;
+  user-select: none;
+  transition: 
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    font-size 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s ease;
+  transform-origin: left center;
+  will-change: transform, color, font-size;
+  /* Prevent label flicker on autofill */
+  backface-visibility: hidden;
+}
+
+/* Float label up when input focused or filled */
+.form-input:focus + label,
+.form-input:not(:placeholder-shown) + label,
+.form-textarea:focus + label,
+.form-textarea:not(:placeholder-shown) + label {
+  color: #0056b3;
+  font-size: 12px;
+  transform: translateY(-30px) scale(0.9);
+  font-weight: 700;
+}
+
+/* On focus, highlight border and add subtle glow */
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 10px rgba(0, 86, 179, 0.35);
+  background-color: #f8fbff;
+}
+
+/* Validation error shake animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+/* Error state - red border, shadow, and shake */
+.form-input.error,
+.form-textarea.error {
+  border-color: #dc3545;
+  box-shadow: 0 0 8px #dc3545;
+  animation: shake 0.3s ease;
+  background-color: #fff5f5;
+  transition: background-color 0.5s ease;
+}
+
+/* Error label color */
+.form-input.error + label,
+.form-textarea.error + label {
+  color: #dc3545;
+}
+
+/* Success state - green border and subtle glow */
+.form-input.success,
+.form-textarea.success {
+  border-color: #28a745;
+  box-shadow: 0 0 8px #28a745aa;
+  background-color: #f7fff7;
+  transition: background-color 0.5s ease;
+}
+
+/* Success label color */
+.form-input.success + label,
+.form-textarea.success + label {
+  color: #28a745;
+}
+
+/* Add a green checkmark icon on success inputs */
+.form-input.success + label::after,
+.form-textarea.success + label::after {
+  content: '✔';
+  color: #28a745;
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: 8px;
+  vertical-align: middle;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Error message below inputs with fade-in */
+.input-error {
+  color: #dc3545;
+  font-size: 13px;
+  margin-top: 6px;
+  font-weight: 600;
+  opacity: 0;
+  animation: fadeInUp 0.3s forwards;
+  transform-origin: left bottom;
+}
+
+.input-error:empty {
+  display: none;
+}
+
+/* Fade in animation for error messages */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Textarea styling */
+.form-textarea {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Submit button tweaks */
+.submit-button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(to right, #0056b3, #003f7f);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 
+    background 0.4s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  position: relative;
+  outline: none;
+  user-select: none;
+}
+
+.submit-button:hover:not(.disabled) {
+  background: linear-gradient(to right, #003f7f, #00285e);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 56, 115, 0.35);
+}
+
+.submit-button:active:not(.disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.submit-button.disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Loading spinner */
+.submit-button.loading {
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.submit-button.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border: 3.5px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1.1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Status message styling with smooth fade */
+.form-status {
+  margin-top: 22px;
+  padding: 14px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  transition: 
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease;
+}
+
+.form-status.success {
+  background-color: #dff3e3;
+  color: #276749;
+  border-color: #a1d99b;
+}
+
+.form-status.error {
+  background-color: #ffe2e2;
+  color: #a94442;
+  border-color: #f5b5b5;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .lead-form-container {
+    padding: 20px;
+  }
+
+  .lead-form-title {
+    font-size: 24px;
+  }
+
+  .submit-button {
+    font-size: 16px;
+    padding: 14px;
+  }
+}
+
+/* Accessibility: strong focus outlines */
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.submit-button:focus-visible {
+  outline: 3px solid #003f7f;
+  outline-offset: 3px;
+  transition: outline-color 0.25s ease;
+}
